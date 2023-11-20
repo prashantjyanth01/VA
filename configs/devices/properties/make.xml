@@ -1,0 +1,28 @@
+<CONFIG>
+    <CONTEXT
+             WEIGHTS="/ees_app_/samples/weights/make/make.weights"
+             MODEL="/ees_app_/samples/weights/make/make.cfg"
+             DATA="/ees_app_/samples/weights/make/make.data"
+             LABELS="/ees_app_/samples/weights/make/make.names"
+             FREQ="1"
+             MODEL_W="416"
+             MODEL_H="416"
+             GPU_ID="0" CONFIDENCE="0.1" NMS_THRESHOLD="0.1" IS_THRESHOLDING_CLASSWISE="false"
+             IS_CLASSIFIER="false"/>
+
+    <CLASS_THRESHOLDS>
+        <CLASS NAME="LP" THRESHOLD="0.50"/>
+        <CLASS NAME="LP_mini" THRESHOLD="100.0"/>
+        <CLASS NAME="LP_heavy" THRESHOLD="100.0"/>
+        <CLASS NAME="Helmet" THRESHOLD="0.50"/>
+        <CLASS NAME="No Helmet" THRESHOLD="0.80"/>
+        <CLASS NAME="person" THRESHOLD="0.4"/>
+        <CLASS NAME="CAR" THRESHOLD="0.4"/>
+        <CLASS NAME="truck" THRESHOLD="0.4"/>
+        <CLASS NAME="bus" THRESHOLD="0.4"/>
+        <CLASS NAME="2W" THRESHOLD="0.30"/>
+        <CLASS NAME="Others" THRESHOLD="100.0"/>
+    </CLASS_THRESHOLDS>
+</CONFIG>
+
+

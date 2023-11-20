@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<!-- @TEAM: CAM_ID, arm_id and location_id moved from main tree element to CAM_INFO element -->
+<!-- SRC_TYPE = 1 for <rtsp> like (rtsp://admin:admin@172.168.4.91) -->
+<!-- and other than 1 is <video> like (/home/shamsher/Downloads/Speed/90kmph.mp4) -->
+<CAM_CONFIG>
+    <CAM_INFO ARM_ID="ARM1SCC0050" LOCATION_ID="SCC0050" CAM_ID="EQMST001160" FPS="25"
+	    CAM_RTSP="./configs/output.mp4"
+              SRC_TYPE="2"
+              VMSRECORDING="true"
+              IS_FRONT_CAM="false" FRAME_WIDTH="1920" FRAME_HEIGHT="1080" SCALE_FACTOR="1" CODECS="MEPG" SYNC="true"/>
+
+    <!--ATCS_MASTER_CONNECT indicates credentials for tcp communication with ATCS Master application -->
+   <ATCS STATUS="false" IP="" PORT="">
+        <CURRENT_COUNT STATUS="True"/>
+        <NEW_COUNT STATUS="True"/>
+        <DENSITY STATUS="false"/>
+        <QUEUE STATUS="true" H="1" M="0.5" L="0.2"/>
+    </ATCS>
+
+    <VATCC STATUS="false" LOG_DUR="0.5" VIDEO_LOGS="TRUE" VIDEO_TIMEOUT="1200"/>
+	<OUTPUT>
+        <VATCC SNAPSHOT="0" SCENE_SNAPSHOT="0"  ANPR_VIDEO="10" SCENE_VIDEO="0" XML_LOGS="TRUE"/>
+        <ANPR SNAPSHOT="1" SCENE_SNAPSHOT="0"  ANPR_VIDEO="0" SCENE_VIDEO="0" XML_LOGS="TRUE"/>
+        <STOPPED SNAPSHOT="1" SCENE_SNAPSHOT="0"  ANPR_VIDEO="5" SCENE_VIDEO="0" XML_LOGS="True"/>
+        <INVERSE SNAPSHOT="1" SCENE_SNAPSHOT="0"  ANPR_VIDEO="5" SCENE_VIDEO="0" XML_LOGS="True"/>
+        <UNDER_SPEED SNAPSHOT="1" SCENE_SNAPSHOT="0"  ANPR_VIDEO="0" SCENE_VIDEO="0" XML_LOGS="True"/>
+        <DECELERATION SNAPSHOT="1" SCENE_SNAPSHOT="0"  ANPR_VIDEO="0" SCENE_VIDEO="0" XML_LOGS="True"/>
+        <HELMET SNAPSHOT="1" SCENE_SNAPSHOT="0"  ANPR_VIDEO="0" SCENE_VIDEO="0" XML_LOGS="True"/>
+        <TRIPLE_RIDING SNAPSHOT="1" SCENE_SNAPSHOT="0"  ANPR_VIDEO="0" SCENE_VIDEO="0" XML_LOGS="True"/>
+        <STOP_LINE_VIOLATE SNAPSHOT="1" SCENE_SNAPSHOT="0"  ANPR_VIDEO="0" SCENE_VIDEO="0" XML_LOGS="True"/>
+        <RED_SIGNAL_VIOLATE SNAPSHOT="1" SCENE_SNAPSHOT="0"  ANPR_VIDEO="0" SCENE_VIDEO="0" XML_LOGS="True"/>
+        <SPEED SNAPSHOT="1" SCENE_SNAPSHOT="0"  ANPR_VIDEO="0" SCENE_VIDEO="0" XML_LOGS="True"/>
+        <INTRUSION SNAPSHOT="1" SCENE_SNAPSHOT="0"  ANPR_VIDEO="0" SCENE_VIDEO="0" XML_LOGS="True"/>
+    </OUTPUT>
+    
+
+    <!-- @TEAM: THRESHOLD child added in RED_LAMP_REGION tree -->
+    <!-- @TEAM: Set ATSC_SIGNAL True if Using UDP Status. Set ATSC_SIGNAL False for Reading Redlight Status from Scene Camera -->
+    <TRAFFIC_LAMP_REGIONS>
+        <ATCS_SIGNAL STATUS="False"/>
+        <REGION STATUS="false" THRESHOLD="220" COLOR="RED">
+            <POINTS>
+                <POINT X="774" Y="76"/>
+                <POINT X="783" Y="76"/>
+                <POINT X="783" Y="83"/>
+                <POINT X="774" Y="83"/>
+            </POINTS>
+        </REGION>
+    </TRAFFIC_LAMP_REGIONS>
+
+
+    <!-- Blinking time for junction during which RLVD will be disabled by default -->
+    <BLINKING_TIME_SLOTS STATUS="false">
+        <TIME_SLOT START_TIME="18:00:00" END_TIME="23:59:59"/>
+        <TIME_SLOT START_TIME="00:00:00" END_TIME="08:00:00"/>
+    </BLINKING_TIME_SLOTS>
+
+    <!--the object detection region where all the detected objects will tracked -->
+    <MAIN_DETECTION_REGION STATUS="true">
+        <POINTS>
+            <POINT X="16" Y="474"/>
+            <POINT X="1863" Y="474"/>
+            <POINT X="1863" Y="1050"/>
+            <POINT X="16" Y="1050"/>
+        </POINTS>
+    </MAIN_DETECTION_REGION>
+
+    <!--Road alignment points for doing camera calibration -->
+    <ROAD_ALIGNED_POINTS STATUS="true">
+        <POINTS>
+            <POINT X="16" Y="474"/>
+            <POINT X="1863" Y="474"/>
+            <POINT X="1863" Y="1050"/>
+            <POINT X="16" Y="1050"/>
+        </POINTS>
+        <ROAD_PARAMS STATUS="TRUE" LENGTH="80" ZONE_LIVES="1" WIDTH="15" MAX_DIST="200" IOU="0"
+                     BOX_WIDTH="30"
+                     BOX_HEIGHT="30" LIVES="5" EQPARAM="-6.15445588e-06;2.27097267e-02;-4.08348681e+00"/>
+        <TRANSFORM_PARAMS FRAME_HEIGHT="1998" FRAME_WIDTH="15" SHIFT_WIDTH="300" SHIFT_HEIGHT="1998"/>
+    </ROAD_ALIGNED_POINTS>
+
+    <!--Zones for analytics -->
+    <ZONE_LIST STATUS="true">
+        <ZONE STATUS="true" ID="0" LANE_ID="1" LEFT="False" RIGHT="true" STRAIGHT="false" LENGTH="15">
+            <POINTS>
+                <POINT X="145" Y="580"/>
+                <POINT X="500" Y="580"/>
+                <POINT X="500" Y="910"/>
+                <POINT X="145" Y="910"/>
+            </POINTS>
+            <INCIDENTS>
+                <OBJ_INC>
+                    <STOPPED STATUS="true" MIN_OCC_DUR="1" VIDEO_DUR="10"/>
+                    <INVERSE STATUS="false" MIN_OCC_DUR="0.8" VIDEO_DUR="10"/>
+                    <INTRUSION STATUS="true" MIN_OCC_DUR="0.3" VIDEO_DUR="0"/>
+                    <OVER_SPEED STATUS="FALSE" SPEED_LIMIT="100" MIN_OCC_DUR="0.1" VIDEO_DUR="0"/>
+                    <UNDER_SPEED STATUS="FALSE" SPEED_LIMIT="10" MIN_OCC_DUR="1" VIDEO_DUR="0"/>
+                    <DECELERATION STATUS="FALSE" SPEED_DIFFERENCE="50" VIDEO_DUR="0"/>
+                    <HELMET STATUS="false" VIDEO_DUR="0"/>
+                    <TRIPLE_RIDING STATUS="false" VIDEO_DUR="0"/>
+                    <STOP_LINE_VIOLATE STATUS="false" MIN_OCC_DUR="0.1" VIDEO_DUR="10"/>
+                    <RED_SIGNAL_VIOLATE STATUS="false" MIN_OCC_DUR="0.1" VIDEO_DUR="10"/>
+                    <ANPR STATUS="false" VIDEO_DUR="0"/>
+                    <SPEED STATUS="false" MAXIMUM_SPEED="80" FPS="60" VIDEO_DUR="0"/>
+                    <VATCC STATUS="false" VIDEO_DUR="0"/>
+                </OBJ_INC>
+
+                <TRAFFIC_INC>
+                    <CONGESSION STATUS="TRUE" MIN_OCC_DUR="3" VEHICLE_COUNT="2" OCCUPENCY="20" ALERT_OCC="20"/>
+                    <CROWD STATUS="TRUE" MIN_OCC_DUR="3" PERSON_COUNT="2" OCCUPENCY="5" ALERT_OCC="20"/>
+                    <NORMAL STATUS="FALSE" MIN_OCC_DUR="3" MAXIMUM_SPEED="100" MINIMUM_SPEED="40" VEHICLE_COUNT="2"/>
+                    <DELAYED STATUS="FALSE" MIN_OCC_DUR="3" MAXIMUM_SPEED="40" MINIMUM_SPEED="30" VEHICLE_COUNT="15"/>
+                    <DENSE STATUS="FALSE" MIN_OCC_DUR="3" MAXIMUM_SPEED="30" MINIMUM_SPEED="20" VEHICLE_COUNT="15"/>
+                    <STOP_GO STATUS="FALSE" MIN_OCC_DUR="3" MAXIMUM_SPEED="15" MINIMUM_SPEED="15" VEHICLE_COUNT="15"/>
+                    <QUEUE STATUS="FALSE" MIN_OCC_DUR="3" MAXIMUM_SPEED="5" MINIMUM_SPEED="0" VEHICLE_COUNT="15"/>
+                    <LEFT_FREE STATUS="FALSE"/>
+                    <LANE_OCCU STATUS="FALSE"/>
+                </TRAFFIC_INC>
+
+
+                <OTHER_INC>
+                    <FALLEN_OBJECT STATUS="false" MIN_WIDTH="10" MAX_WIDTH="100" MIN_HEIGHT="10" MAX_HEIGHT="40"
+                                   VIDEO_DUR="6"/>
+                    <CAMERA_TAMPERING STATUS="FALSE" VIDEO_DUR="2"/>
+                </OTHER_INC>
+
+                <PEOPLE_INC>
+                    <PEDESTRIAN_CROSSING STATUS="false" MIN_OCC_DUR="5" VIDEO_DUR="2"/>
+                    <PEOPLE_COLLECTION STATUS="FALSE" MIN_OCC_DUR="5"  MAXIMUM_DISTANCE="2" MINIMUM_COUNT="2"/>
+                </PEOPLE_INC>
+
+                <WEATHER_CONDITION>
+                    <CLEAR_VIEW STATUS="FALSE"/>
+                    <POOR_VIEW STATUS="FALSE"/>
+                </WEATHER_CONDITION>
+
+            </INCIDENTS>
+        </ZONE>
+        
+        <ZONE STATUS="true" ID="1" LANE_ID="2" LEFT="False" RIGHT="false" STRAIGHT="true">
+            <POINTS>
+               <POINT X="518" Y="495"/>
+            <POINT X="680" Y="503"/>
+            <POINT X="613" Y="594"/>
+            <POINT X="428" Y="586"/>
+                </POINTS>
+            <INCIDENTS>
+                <OBJ_INC>
+                    <STOPPED STATUS="false" MIN_OCC_DUR="1" VIDEO_DUR="0"/>
+                    <INTRUSION STATUS="true" MIN_OCC_DUR="0.2" VIDEO_DUR="0"/>
+                    <INVERSE STATUS="false" MIN_OCC_DUR="0.2" VIDEO_DUR="0"/>
+                    <OVER_SPEED STATUS="FALSE" SPEED_LIMIT="100" MIN_OCC_DUR="0.1" VIDEO_DUR="0"/>
+                    <UNDER_SPEED STATUS="FALSE" SPEED_LIMIT="10" MIN_OCC_DUR="1" VIDEO_DUR="0"/>
+                    <DECELERATION STATUS="FALSE" SPEED_DIFFERENCE="50" VIDEO_DUR="0"/>
+                    <HELMET STATUS="FALSE" VIDEO_DUR="0"/>
+                    <TRIPLE_RIDING STATUS="FALSE" VIDEO_DUR="0"/>
+                    <STOP_LINE_VIOLATE STATUS="false" MIN_OCC_DUR="1" VIDEO_DUR="10"/>
+                    <RED_SIGNAL_VIOLATE STATUS="false" MIN_OCC_DUR="1" VIDEO_DUR="10"/>
+                    <ANPR STATUS="FALSE" VIDEO_DUR="0"/>
+                    <SPEED STATUS="false" MAXIMUM_SPEED="80" FPS="60" VIDEO_DUR="0"/>
+                    <VATCC STATUS="false" VIDEO_DUR="0"/>
+                </OBJ_INC>
+
+                <TRAFFIC_INC>
+                    <CONGESSION STATUS="false" MIN_OCC_DUR="3" VEHICLE_COUNT="2" OCCU="40" ALERT_FREQ="1"/>
+                    <CROWD STATUS="false" MIN_OCC_DUR="3" PERSON_COUNT="15" OCCU="30" ALERT_FREQ="1"/>
+                    <NORMAL STATUS="FALSE" MIN_OCC_DUR="3" MAXIMUM_SPEED="100" MINIMUM_SPEED="40" VEHICLE_COUNT="2"/>
+                    <DELAYED STATUS="FALSE" MIN_OCC_DUR="3" MAXIMUM_SPEED="40" MINIMUM_SPEED="30" VEHICLE_COUNT="15"/>
+                    <DENSE STATUS="FALSE" MIN_OCC_DUR="3" MAXIMUM_SPEED="30" MINIMUM_SPEED="20" VEHICLE_COUNT="15"/>
+                    <STOP_GO STATUS="FALSE" MIN_OCC_DUR="3" MAXIMUM_SPEED="15" MINIMUM_SPEED="15" VEHICLE_COUNT="15"/>
+                    <QUEUE STATUS="FALSE" MIN_OCC_DUR="3" MAXIMUM_SPEED="5" MINIMUM_SPEED="0" VEHICLE_COUNT="15"/>
+                    <LEFT_FREE STATUS="FALSE"/>
+                    <LANE_OCCU STATUS="FALSE"/>
+                </TRAFFIC_INC>
+
+
+                <OTHER_INC>
+                    <FALLEN_OBJECT STATUS="false" MIN_WIDTH="10" MAX_WIDTH="100" MIN_HEIGHT="10" MAX_HEIGHT="40"
+                                   VIDEO_DUR="6"/>
+                    <CAMERA_TAMPERING STATUS="FALSE" VIDEO_DUR="2"/>
+                </OTHER_INC>
+
+                <PEOPLE_INC>
+                    <PEDESTRIAN_CROSSING STATUS="false" MIN_OCC_DUR="5" VIDEO_DUR="2"/>
+                    <PEOPLE_COLLECTION STATUS="FALSE" MIN_OCC_DUR="5"  MAXIMUM_DISTANCE="2" MINIMUM_COUNT="2"/>
+                </PEOPLE_INC>
+
+                <WEATHER_CONDITION>
+                    <CLEAR_VIEW STATUS="FALSE"/>
+                    <POOR_VIEW STATUS="FALSE"/>
+                </WEATHER_CONDITION>
+
+            </INCIDENTS>
+        </ZONE>
+        <ZONE STATUS="true" ID="2" LANE_ID="2" LEFT="False" RIGHT="false" STRAIGHT="true">
+            <POINTS>
+                <POINT X="1256" Y="710"/>
+                <POINT X="1730" Y="710"/>
+                <POINT X="1730" Y="991"/>
+                <POINT X="1256" Y="991"/>
+            </POINTS>
+            <INCIDENTS>
+                <OBJ_INC>
+                    <STOPPED STATUS="false" MIN_OCC_DUR="1" VIDEO_DUR="0"/>
+                    <INTRUSION STATUS="true" MIN_OCC_DUR="0.2" VIDEO_DUR="0"/>
+                    <INVERSE STATUS="true" MIN_OCC_DUR="0.2" VIDEO_DUR="0"/>
+                    <OVER_SPEED STATUS="FALSE" SPEED_LIMIT="100" MIN_OCC_DUR="0.1" VIDEO_DUR="0"/>
+                    <UNDER_SPEED STATUS="FALSE" SPEED_LIMIT="10" MIN_OCC_DUR="1" VIDEO_DUR="0"/>
+                    <DECELERATION STATUS="FALSE" SPEED_DIFFERENCE="50" VIDEO_DUR="0"/>
+                    <HELMET STATUS="FALSE" VIDEO_DUR="0"/>
+                    <TRIPLE_RIDING STATUS="FALSE" VIDEO_DUR="0"/>
+                    <STOP_LINE_VIOLATE STATUS="false" MIN_OCC_DUR="1" VIDEO_DUR="10"/>
+                    <RED_SIGNAL_VIOLATE STATUS="false" MIN_OCC_DUR="1" VIDEO_DUR="10"/>
+                    <ANPR STATUS="FALSE" VIDEO_DUR="0"/>
+                    <SPEED STATUS="false" MAXIMUM_SPEED="80" FPS="60" VIDEO_DUR="0"/>
+                    <VATCC STATUS="false" VIDEO_DUR="0"/>
+                </OBJ_INC>
+
+                <TRAFFIC_INC>
+                    <CONGESSION STATUS="false" MIN_OCC_DUR="3" VEHICLE_COUNT="2" OCCU="40" ALERT_FREQ="1"/>
+                    <CROWD STATUS="false" MIN_OCC_DUR="3" PERSON_COUNT="15" OCCU="30" ALERT_FREQ="1"/>
+                    <NORMAL STATUS="FALSE" MIN_OCC_DUR="3" MAXIMUM_SPEED="100" MINIMUM_SPEED="40" VEHICLE_COUNT="2"/>
+                    <DELAYED STATUS="FALSE" MIN_OCC_DUR="3" MAXIMUM_SPEED="40" MINIMUM_SPEED="30" VEHICLE_COUNT="15"/>
+                    <DENSE STATUS="FALSE" MIN_OCC_DUR="3" MAXIMUM_SPEED="30" MINIMUM_SPEED="20" VEHICLE_COUNT="15"/>
+                    <STOP_GO STATUS="FALSE" MIN_OCC_DUR="3" MAXIMUM_SPEED="15" MINIMUM_SPEED="15" VEHICLE_COUNT="15"/>
+                    <QUEUE STATUS="FALSE" MIN_OCC_DUR="3" MAXIMUM_SPEED="5" MINIMUM_SPEED="0" VEHICLE_COUNT="15"/>
+                    <LEFT_FREE STATUS="FALSE"/>
+                    <LANE_OCCU STATUS="FALSE"/>
+                </TRAFFIC_INC>
+
+
+                <OTHER_INC>
+                    <FALLEN_OBJECT STATUS="false" MIN_WIDTH="10" MAX_WIDTH="100" MIN_HEIGHT="10" MAX_HEIGHT="40"
+                                   VIDEO_DUR="6"/>
+                    <CAMERA_TAMPERING STATUS="FALSE" VIDEO_DUR="2"/>
+                </OTHER_INC>
+
+                <PEOPLE_INC>
+                    <PEDESTRIAN_CROSSING STATUS="false" MIN_OCC_DUR="5" VIDEO_DUR="2"/>
+                    <PEOPLE_COLLECTION STATUS="FALSE" MIN_OCC_DUR="5"  MAXIMUM_DISTANCE="2" MINIMUM_COUNT="2"/>
+                </PEOPLE_INC>
+
+                <WEATHER_CONDITION>
+                    <CLEAR_VIEW STATUS="FALSE"/>
+                    <POOR_VIEW STATUS="FALSE"/>
+                </WEATHER_CONDITION>
+
+            </INCIDENTS>
+        </ZONE>
+        
+    </ZONE_LIST>
+</CAM_CONFIG>

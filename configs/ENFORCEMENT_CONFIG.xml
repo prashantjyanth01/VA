@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<SYSTEM_CONFIG>
+    <ACTIVE_SOURCES_GROUPS>
+        <SRC_GRP ID="1" STATUS="true" DEVICE_ID="0" ATCS_STATUS="false" TYPE = "VDC" FREQ = "1">
+            <CAM_CONFIGS>
+                <CONFIG STATUS="true" FILE_PATH="./configs/SOURCE_CONFIGS/src01/CAM_CONFIG_1.xml"/>
+                <CONFIG STATUS="false" FILE_PATH="./configs/SOURCE_CONFIGS/src01/CAM_CONFIG_2.xml"/>
+                <CONFIG STATUS="false" FILE_PATH="./configs/SOURCE_CONFIGS/src01/CAM_CONFIG_3.xml"/>
+                <CONFIG STATUS="false" FILE_PATH="./configs/SOURCE_CONFIGS/src01/CAM_CONFIG_4.xml"/>
+            </CAM_CONFIGS>
+            <PROPERTIES FILE_PATH="./configs/devices/properties/properties_2.xml"/>
+        </SRC_GRP>
+
+       <SRC_GRP ID="2" STATUS="false" DEVICE_ID="0" ATCS_STATUS="false" TYPE="VDC" FREQ = "1">
+            <CAM_CONFIGS>
+                <CONFIG STATUS="true" FILE_PATH="./configs/SOURCE_CONFIGS/src02/CAM_CONFIG_1.xml"/>
+                <CONFIG STATUS="false" FILE_PATH="./configs/SOURCE_CONFIGS/src02/CAM_CONFIG_2.xml"/>
+                <CONFIG STATUS="false" FILE_PATH="./configs/SOURCE_CONFIGS/src02/CAM_CONFIG_3.xml"/>
+                <CONFIG STATUS="false" FILE_PATH="./configs/SOURCE_CONFIGS/src02/CAM_CONFIG_4.xml"/>
+            </CAM_CONFIGS>
+            <PROPERTIES FILE_PATH="./configs/devices/properties/properties_2.xml"/>
+        </SRC_GRP>
+
+
+       <SRC_GRP ID="3" STATUS="false" DEVICE_ID="0" ATCS_STATUS="false" TYPE="VDC" FREQ = "1">
+            <CAM_CONFIGS>
+                <CONFIG STATUS="true" FILE_PATH="./configs/SOURCE_CONFIGS/src03/CAM_CONFIG_1.xml"/>
+                <CONFIG STATUS="true" FILE_PATH="./configs/SOURCE_CONFIGS/src03/CAM_CONFIG_2.xml"/>
+                <CONFIG STATUS="true" FILE_PATH="./configs/SOURCE_CONFIGS/src03/CAM_CONFIG_3.xml"/>
+                <CONFIG STATUS="true" FILE_PATH="./configs/SOURCE_CONFIGS/src03/CAM_CONFIG_4.xml"/>
+            </CAM_CONFIGS>
+            <PROPERTIES FILE_PATH="./configs/devices/properties/properties_w2e.xml"/>
+        </SRC_GRP>
+
+       <SRC_GRP ID="4" STATUS="false" DEVICE_ID="0" ATCS_STATUS="false" TYPE="VDC" FREQ = "1">
+            <CAM_CONFIGS>
+                <CONFIG STATUS="true" FILE_PATH="./configs/SOURCE_CONFIGS/src04/CAM_CONFIG_1.xml"/>
+                <CONFIG STATUS="true" FILE_PATH="./configs/SOURCE_CONFIGS/src04/CAM_CONFIG_2.xml"/>
+                <CONFIG STATUS="true" FILE_PATH="./configs/SOURCE_CONFIGS/src04/CAM_CONFIG_3.xml"/>
+                <CONFIG STATUS="true" FILE_PATH="./configs/SOURCE_CONFIGS/src04/CAM_CONFIG_4.xml"/>
+				
+            </CAM_CONFIGS>
+            <PROPERTIES FILE_PATH="./configs/devices/properties/properties_w2e.xml"/>
+        </SRC_GRP>
+
+    </ACTIVE_SOURCES_GROUPS>
+    
+    <!--@Team Set the port same as set on ATCS master application side and check its availability with network team no blockage-->
+    <ATCS_SIGNAL_RECEIVER PORT='10027' TIMEOUT='100' />
+
+    <SFTP_FILE_TRANSFER>
+        <CONTROL_ROOM MODE="SFTP" HOST="10.10.19.56" PORT="22" USERNAME="efkon" PASSWORD="efkon@123"
+                      REMOTE_DIR="/UnprocessedFiles/" EVENTS="FALSE"/>
+    </SFTP_FILE_TRANSFER>
+    <VMS VMSHOSTIP="192.168.151.142" PORT="5001"
+         VMSBACKUPHOURS="3" FILESERVERIP="192.168.151.142"
+         SFTPPORT="22" USERNAME="prashant" PASSWORD="efkon@123" ROOTDIR="/" RetryCount='3'/>
+
+    <INCIDENTS>
+        <CODES RED_SIGNAL_VIOLATE="001"
+               STOP_LINE_VIOLATE="002"
+               INTRUSION="037"
+               CROWD="036"
+               SPEED="003"
+               ANPR="004"
+               VATCC="005"
+               RESERVE2="006"
+               RESERVE3="007"
+               RESERVE4="008"
+               RESERVE5="009"
+               RESERVE6="010"
+               STOPPED="011"
+               INVERSE="012"
+               PEDESTRIAN_STANDING="013"
+               PEDESTRIAN_STRAIGHT="014"
+               PEDESTRIAN_CROSSING="015"
+               HELMET="016"
+               OVER_SPEED="017"
+               UNDER_SPEED="018"
+               ACCELERATION="019"
+               DECELERATION="020"
+               TRIPLE_RIDING="021"
+               FALLEN_OBJECT="022"
+               NORMAL="023"
+               DENSE="024"
+               DELAYED="025"
+               QUEUE="026"
+               STOP_GO="027"
+               CONGESSION="028"
+               PEOPLE_COLLECTION="029"
+               CLEAR_VIEW="030"
+               POOR_VIEW="031"
+               FIRE="032"
+               SCENE_CHANGE="033"
+               LEFT_FREE="034"
+               LANE_OCCU="035"/>
+        <MUTUALLY_INCLUSIVE>
+            <GROUP ID="1">
+                <INCIDENT INCIDENT_CODE="001" IS_PREFERRED="true"/>
+                <INCIDENT INCIDENT_CODE="002" IS_PREFERRED="FALSE"/>
+            </GROUP>
+            <GROUP ID="2">
+                <INCIDENT INCIDENT_CODE="012" IS_PREFERRED="true"/>
+                <INCIDENT INCIDENT_CODE="001" IS_PREFERRED="FALSE"/>
+            </GROUP>
+            <GROUP ID="3">
+                <INCIDENT INCIDENT_CODE="012" IS_PREFERRED="true"/>
+                <INCIDENT INCIDENT_CODE="002" IS_PREFERRED="FALSE"/>
+            </GROUP>
+        </MUTUALLY_INCLUSIVE>
+        <IGNORE_INCIDENCE CODES=""/>
+        <THRESHOLDS>
+            <CODE ID="004" VALIDATE_LP="true" MIN_LP_WIDTH_SL="40" MIN_LP_HEIGHT_SL="40" MIN_LP_WIDTH_DL="40"
+                  MIN_LP_HEIGHT_DL="40"/>
+            <CODE ID="033" INTERNAL_CALLING_INTV="15" CONTOUR_THRESHOLD="30" MIN_OCC_DUR="10"/>
+            <CODE ID="022" MIN_OCC_DUR="40"/>
+            <CODE ID="016" BUFFER_SIZE="1" CONFIDENCE_FACTOR="0.4"/>
+            <CODE ID="021" BUFFER_SIZE="3" CONFIDENCE_FACTOR="0.1"/>
+            <!--  Applicable for all the traffic incidents  -->
+            <CODE ID="023" MAX_LIMIT="75" GLOBAL_CHECK_INTERVAL="5" OUTPUT_VIDEO_DUR="10"/>
+        </THRESHOLDS>
+        <ERROR_CODES>
+            <ERROR CODE="01" DESC="LP not visible completely"/>
+        </ERROR_CODES>
+    </INCIDENTS>
+</SYSTEM_CONFIG>

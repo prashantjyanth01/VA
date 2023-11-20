@@ -1,0 +1,44 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="OUTPUT">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="APPLICATION_VERSION">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute type="xs:string" name="VA"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element type="xs:string" name="ALERT_TRACKING_NUMBER"/>
+        <xs:element name="VA">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute type="xs:string" name="ALERT_TYPE"/>
+                <xs:attribute type="xs:string" name="LOCATION_ID"/>
+                <xs:attribute type="xs:string" name="CAM_ID"/>
+                <xs:attribute type="xs:byte" name="ZONE_ID"/>
+                <xs:attribute type="xs:float" name="TIME_STAMP"/>
+                <xs:attribute type="xs:string" name="OBJECT_TYPE"/>
+                <xs:attribute type="xs:byte" name="OBJ_COUNT"/>
+                <xs:attribute type="xs:string" name="VIDEO"/>
+                <xs:attribute type="xs:string" name="SNAPSHOT"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CRC">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute type="xs:byte" name="CHECKSUM"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

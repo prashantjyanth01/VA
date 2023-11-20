@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<LOCAL_CONFIG_ALL>
+    <LOCAL_CONFIG_EDITED TIME="2019-11-19::17:37:48"/>
+    <LOCATION LOC_ID="0120324"/>
+
+    <DATA_STORAGE>
+        <LOCAL_DIRECTORIES TXN_PATH="/home/prashant/ees_testing/TXNS"
+                           LOGS_PATH="/home/prashant/ees_testing/LOGS/"
+                           UNDERPROCESS="/home/prashant/ees_testing/UnderProcessed"
+                           FAULTY="/home/prashant/ees_testing/faulty"
+                           PROCESSED="/home/prashant/ees_testing/processed"
+                           EVENTS="/home/prashant/ees_testing/events/"
+                           ACK="/home/prashant/ees_testing/ACK/"
+                           VIDEO_CLIP_PATH="/home/prashant/ees_testing/VideoClip/"/>
+        <VIDEO_COMPRESSION_CARD ID="0"/>
+        <MISC CONNECTION_RETRY_COUNT="5" UNDERPROCESS_UPLOAD_SIZE="15" ARCHIVE_WAIT_INTV="100"
+              ARCHIVE_CLEAR_INTV="7" PRIORITY_BASED_TRANSFER="true" VIDEO_UPLOAD_BATCH_SIZE="5"/>
+    </DATA_STORAGE>
+
+    <API_ERROR_DETAILS STATUS="false" URL="http://192.168.30.11:8005/InsertAtccError">
+        <ERROR ID="01" STATUS="TRUE" DESC="Resolution width does not match"/>
+        <ERROR ID="02" STATUS="TRUE" DESC="Resolution height does not match"/>
+        <ERROR ID="03" STATUS="TRUE" DESC="FPS does not match"/>
+        <ERROR ID="04" STATUS="TRUE" DESC="Transaction can not be uploaded"/>
+    </API_ERROR_DETAILS>
+
+    <!-- All MONITORING_TIME are in seconds -->
+    <WATCHDOG STATUS="false" DEBUG_STATUS="true">
+        <EVENT TYPE="ARM_APPLICATION" STATUS="TRUE" MONITORING_TIME="60"/>
+        <EVENT TYPE="QUEUE_MANAGER" STATUS="TRUE" MONITORING_TIME="60"/>
+        <EVENT TYPE="COMMUNICATION_AGENT" STATUS="TRUE" MONITORING_TIME="120"/>
+        <EVENT TYPE="DOWNLOAD_FILES" STATUS="TRUE" MONITORING_TIME="60"/>
+        <EVENT TYPE="UPLOAD_FILE_2_SERVER" STATUS="TRUE" MONITORING_TIME="60"/>
+        <EVENT TYPE="DELETE_REMOTE_FILE" STATUS="TRUE" MONITORING_TIME="60"/>
+    </WATCHDOG>
+
+</LOCAL_CONFIG_ALL>

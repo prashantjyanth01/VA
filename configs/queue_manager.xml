@@ -1,0 +1,10 @@
+<CONFIG>
+    <ATCS STATUS="false" IP="192.168.10.110" PORT="1111"/>
+    <QUEUE_CONTEXT>
+        <VEHICLE_MAKE STATUS="false" CONFIG_PATH="./configs/devices/properties/make.xml"/>
+        <VEHICLE_MODEL STATUS="false" CONFIG_PATH="./configs/devices/properties/model.xml"/>
+        <COLOR STATUS="false" CONFIG_PATH="./configs/devices/properties/color.xml"/>
+        <WEATHER_CLASSIFIER STATUS="false" CONFIG_PATH="./configs/devices/properties/weather.xml"/>
+	<OCR STATUS="true" PADDING="400" LP_SIZE_THRESHOLD="60" CONDITIONAL_STRETCH="200"  CONFIG_PATH="./configs/devices/properties/ocr_trt.xml"/>
+    </QUEUE_CONTEXT>
+</CONFIG>

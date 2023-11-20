@@ -1,0 +1,35 @@
+<CONFIG>
+    <CONTEXT
+            MODEL_PATH="/ees_app_/samples/weights/anpr_tiny_yolo_new_v2/model.engine"
+            MODEL_W="640"
+            MODEL_H="480"
+            LABELS="/ees_app_/samples/weights/anpr_tiny_yolo_new_v2/labels.txt"
+            FREQ="2"
+            GPU_ID="0"
+            CONFIDENCE="0.7"
+            NMS_THRESHOLD="0.9"
+            NUM_CLASSES="7"
+            STRIDE="16"
+            OFFSETS="103.939;116.779;123.68"
+            IS_THRESHOLDING_CLASSWISE="true"
+            CAL="/ees_app_/samples/weights/anpr_tiny_yolo_new_v2/cal.bin"
+            KEY="b3YydnQzZnViaXA0aXRibWhhYmQ5OWQzbm86ZGZjNWUwODItMzZkZi00MjU1LTljZmMtMTQ4NzJkZDkwZjQ1"
+            INPUT_SHAPE="3,480,640"
+            OUTPUT_NODE_NAMES="BatchedNMS"
+            BATCH_SIZE="1"
+            MAX_BATCH_SIZE="1"
+            DATA_TYPE="int8"
+            OPTIMIZATION_PROFILES="Input,1x3x480x640,1x3x480x640,1x3x480x640"
+            RAW_MODEL="/ees_app_/samples/weights/anpr_tiny_yolo_new_v2/model.etlt"/>
+
+    <CLASS_THRESHOLDS>
+        <CLASS NAME="LP" THRESHOLD="0.7"/>
+        <CLASS NAME="LMV" THRESHOLD="0.7"/>
+        <CLASS NAME="HMV" THRESHOLD="0.7"/>
+        <CLASS NAME="2W" THRESHOLD="0.7"/>
+        <CLASS NAME="AUTO" THRESHOLD="0.7"/>
+        <CLASS NAME="HELMET" THRESHOLD="0.9"/>
+        <CLASS NAME="NO_HELMET" THRESHOLD="0.9"/>
+    </CLASS_THRESHOLDS>
+</CONFIG>
+
